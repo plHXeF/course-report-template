@@ -1,0 +1,260 @@
+% !TeX encoding = UTF-8
+% !TeX program = xelatex
+% 独立的排版示例手册：复制所需环境到 main.tex 即可。
+\documentclass[UTF8,a4paper,zihao=-4,fontset=fandol]{ctexart}
+\usepackage{course-report}
+\renewcommand{\ReportTitle}{课程报告排版示例}
+\renewcommand{\ReportHeader}{课程报告\quad 排版示例}
+\hypersetup{pdftitle={课程报告排版示例}}
+
+\begin{document}
+\begin{center}
+  {\heiti\zihao{2}课程报告排版示例\par}
+  \vspace{0.5em}
+  本文件可独立编译；按需将相应环境复制到主文件中。
+\end{center}
+
+\section{公式、符号与单位}
+\subsection{公式与交叉引用}
+多行公式使用 \texttt{align} 环境，引用公式使用 \verb|\eqref|：
+\begin{align}
+  \hat{y}_i &= a x_i + b,\label{eq:linear}\\
+  \operatorname{RMSE} &= \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}.
+  \label{eq:rmse}
+\end{align}
+式~\eqref{eq:linear} 表示线性关系，式~\eqref{eq:rmse} 定义均方根误差。
+
+单位命令：\verb|\SI{120}{\centi\metre}|，效果为
+\SI{120}{\centi\metre}；面积可写为 \SI{25}{\square\kilo\metre}。
+
+\subsection{符号说明表}
+\begin{table}[htbp]
+  \centering
+  \caption{符号说明}
+  \label{tab:symbols}
+  \begin{tabularx}{0.9\linewidth}{|P{1.8cm}|L|P{2.2cm}|}
+    \hline
+    符号 & 含义 & 单位 \\
+    \hline
+    $n$ & 样本总数 & 无量纲 \\
+    \hline
+    $x_i$ & 第 $i$ 个样本的观测值 & 依变量定义 \\
+    \hline
+    $\bar{x}$ & 样本均值 & 与 $x_i$ 相同 \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\clearpage
+\section{常用表格}
+\subsection{三线表与分组表头}
+优先使用三线表。以下数值仅用于排版演示，不代表实际实验结果。
+表格标题放在上方，\verb|\label| 放在 \verb|\caption| 后面。
+
+\begin{table}[htbp]
+  \centering
+  \caption{不同方法的指标比较（示例数据）}
+  \label{tab:metrics}
+  \begin{tabularx}{\linewidth}{LCCCC}
+    \toprule
+    \multirow{2}{*}{方法} & \multicolumn{2}{c}{训练集} & \multicolumn{2}{c}{测试集} \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+    & RMSE & $R^2$ & RMSE & $R^2$ \\
+    \midrule
+    方法 A & 0.12 & 0.91 & 0.15 & 0.88 \\
+    方法 B & 0.10 & 0.94 & 0.13 & 0.90 \\
+    方法 C & 0.09 & 0.95 & 0.12 & 0.92 \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{带边框表格与浅蓝底色}
+保留参考文件的网格表和浅蓝配色。长文字列使用 \texttt{tabularx} 自动换行，
+无需将整张表缩放到难以阅读的字号。
+\begin{table}[htbp]
+  \centering
+  \caption{数据字段说明}
+  \label{tab:fields}
+  \begin{tabularx}{\linewidth}{|P{2cm}|P{2cm}|L|}
+    \hline
+    \rowcolor{TableHead} 字段 & 类型 & 说明 \\
+    \hline
+    编号 & 整数 & 每条记录的唯一标识 \\
+    \hline
+    \rowcolor{TableStripe} 观测值 & 浮点数 & 记录测量值，并在正文交代计量单位和数据精度 \\
+    \hline
+    时间 & 日期时间 & 说明观测时刻、时间范围和使用的时区 \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\clearpage
+\subsection{左右并列表格}
+每张表分别编号，适合比较结构相近的两组数据。
+在小页面中使用 \verb|\linewidth| 控制宽度。
+\begin{table}[htbp]
+  \centering
+  \begin{minipage}[t]{0.47\linewidth}
+    \centering
+    \caption{第一组结果（示例）}\label{tab:left}
+    \begin{tabularx}{\linewidth}{CC}
+      \toprule
+      样本 & 数值 \\
+      \midrule
+      A & 12.3 \\
+      B & 15.6 \\
+      C & 14.2 \\
+      \bottomrule
+    \end{tabularx}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.47\linewidth}
+    \centering
+    \caption{第二组结果（示例）}\label{tab:right}
+    \begin{tabularx}{\linewidth}{CC}
+      \toprule
+      样本 & 数值 \\
+      \midrule
+      A & 11.8 \\
+      B & 14.9 \\
+      C & 13.7 \\
+      \bottomrule
+    \end{tabularx}
+  \end{minipage}
+\end{table}
+
+\subsection{跨页长表}
+长表使用 \texttt{longtable}，不要再套 \texttt{table} 浮动环境。
+以下数据较短；增加行数后会自动分页并重复表头。
+\begin{longtable}{@{}P{1.5cm}p{3cm}p{8cm}@{}}
+  \caption{处理步骤记录}\label{tab:long}\\
+  \toprule
+  步骤 & 名称 & 说明 \\
+  \midrule
+  \endfirsthead
+  \multicolumn{3}{c}{表~\thetable\quad 处理步骤记录（续）}\\
+  \toprule
+  步骤 & 名称 & 说明 \\
+  \midrule
+  \endhead
+  \midrule
+  \multicolumn{3}{r}{续下页}\\
+  \endfoot
+  \bottomrule
+  \endlastfoot
+  1 & 数据读取 & 检查文件格式、字段名称和单位。 \\
+  2 & 数据检查 & 识别缺失值、重复值和明显异常值。 \\
+  3 & 数据处理 & 记录处理规则并保留原始数据。 \\
+  4 & 结果输出 & 导出结果、日志和必要的说明。 \\
+\end{longtable}
+
+\clearpage
+\section{图片与子图}
+\subsection{单图}
+当前图框无需外部文件即可编译。实际使用时，把占位命令替换为：
+\begin{lstlisting}[language=TeX,numbers=none]
+\includegraphics[width=0.8\linewidth]{figures/result.pdf}
+\end{lstlisting}
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \FigurePlaceholder[3cm]{在此插入结果图或流程图}
+  \end{minipage}
+  \caption{单图示例}
+  \label{fig:single}
+\end{figure}
+
+\subsection{多图并排与子图引用}
+使用 \texttt{subcaption} 提供子图编号。可以引用整图（图~\ref{fig:comparison}），
+也可以引用子图（图~\ref{fig:comparison}\subref{fig:before}）。
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[t]{0.47\linewidth}
+    \centering
+    \FigurePlaceholder[3cm]{处理前}
+    \caption{处理前的结果}\label{fig:before}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.47\linewidth}
+    \centering
+    \FigurePlaceholder[3cm]{处理后}
+    \caption{处理后的结果}\label{fig:after}
+  \end{subfigure}
+  \caption{处理前后对比}
+  \label{fig:comparison}
+\end{figure}
+四图排版时，可复制上面两个子图，在两行之间加
+\verb|\par\medskip|。需要两张独立编号的图片时，可仿照并列表格，
+将两个 \texttt{minipage} 放在同一个 \texttt{figure} 中并分别添加标题。
+
+\clearpage
+\section{算法、列表与参考文献}
+\subsection{伪代码}
+\begin{algorithm}[htbp]
+  \caption{样本均值计算}\label{alg:mean}
+  \begin{algorithmic}[1]
+    \Require 非空样本集合 $X=\{x_1,\ldots,x_n\}$
+    \Ensure 样本均值 $\bar{x}$
+    \State $s\gets 0$
+    \For{$i=1,\ldots,n$}
+      \State $s\gets s+x_i$
+    \EndFor
+    \State $\bar{x}\gets s/n$
+    \State \Return $\bar{x}$
+  \end{algorithmic}
+\end{algorithm}
+算法~\ref{alg:mean} 演示输入、输出、循环和返回值。
+
+\subsection{有序与无序列表}
+\begin{enumerate}
+  \item 明确研究目标和评价指标。
+  \item 记录数据来源、参数和处理过程。
+  \item 分析实验结果并说明局限。
+\end{enumerate}
+\begin{itemize}
+  \item 图表应在正文中被引用，并有清晰的标题。
+  \item 引用资料应标注文献，引用方法为 \verb|\cite{ref:latex}|。
+\end{itemize}
+例如，LaTeX 的文档结构与排版方法可参考文献~\cite{ref:latex}。
+
+\section{源代码}
+代码可以直接写入 \texttt{lstlisting}，也可用下列命令插入外部源文件：
+\begin{lstlisting}[language=TeX,numbers=none]
+\lstinputlisting[language=Python,caption={数据处理程序}]{code.py}
+\end{lstlisting}
+代码示例采用 ASCII 字符，避免不同系统下中文注释的断行差异。
+\begin{lstlisting}[language=Python,caption={Python 示例},label={lst:python}]
+def mean(values):
+    if not values:
+        raise ValueError("values must not be empty")
+    return sum(values) / len(values)
+
+print(mean([1.0, 2.0, 3.0]))
+\end{lstlisting}
+
+\clearpage
+\appendix
+\section{MATLAB 代码示例}
+附录自动使用字母编号，无需手工重定义每个小节编号。
+\begin{lstlisting}[language=Matlab,caption={MATLAB 示例}]
+x = [1, 2, 3, 4];
+average = mean(x);
+fprintf('Mean: %.2f\n', average);
+\end{lstlisting}
+
+\section{其他可选设置}
+\begin{itemize}
+  \item 默认图、表、公式分别全文连续编号，附录沿用计数。
+  \item 如需按节编号，在导言区添加下列设置。
+\end{itemize}
+\begin{lstlisting}[language=TeX,numbers=none]
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\end{lstlisting}
+
+\clearpage
+\phantomsection\addcontentsline{toc}{section}{参考文献}
+\begin{thebibliography}{99}
+  \bibitem{ref:latex} Leslie Lamport. LaTeX: A Document Preparation System[M].
+    2nd ed. Addison-Wesley, 1994.
+\end{thebibliography}
+\end{document}
