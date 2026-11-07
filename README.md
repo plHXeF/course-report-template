@@ -14,7 +14,7 @@
 复制以下提示词模板，替换其中的报告与课程信息后发送给你的 AI Agent 即可：
 
 ```text
-使用 https://github.com/plHXeF/course-report-template 做出一份xx报告，课程名称《xxx》，缺失的环境请自动配置。具体要求<prompt>你自己的提示词</prompt>
+使用 https://github.com/plHXeF/course-report-template 模板做出一份xx报告，课程名称《xxx》。请自行检测本机环境，以及环境管理手段（如Python conda / uv），缺失的环境请自动配置。具体要求<prompt>你自己的提示词</prompt>
 ```
 
 ---
