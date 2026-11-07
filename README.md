@@ -7,9 +7,9 @@
 
 ## 适配 Agent 工作流
 
-本模板对各类 AI 编程与自主 Agent（如 Claude Code、Cursor、Windsurf、GitHub Copilot、Gemini 等）高度友好。依赖精简透明，无复杂的外部环境要求，方便 Agent 自动化阅读、修改与编译。
+本模板对 AI Agent（如 Codex、DeepSeek Harness、Claude Code 等）友好。依赖精简透明，无复杂的外部环境要求。
 
-### 一句话让 Agent 出具报告
+### 一句话让 Agent 使用该模板出具报告
 
 复制以下提示词模板，替换其中的报告与课程信息后发送给你的 AI Agent 即可：
 
